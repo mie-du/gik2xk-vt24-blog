@@ -1,5 +1,7 @@
-function Tag() {
-  return <h3>Tag</h3>;
+import { Chip } from '@mui/material';
+
+function Tag({ text }) {
+  return <Chip label={text}></Chip>;
 }
 
 export default Tag;
