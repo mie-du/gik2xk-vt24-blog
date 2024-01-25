@@ -18,17 +18,24 @@ const router = createBrowserRouter([
         element: <Home />
       },
       {
+        path: '/posts/:id/edit',
+        element: <PostEdit />
+      },
+      {
+        path: '/posts/:id',
+        element: <PostDetail />
+      },
+      {
         path: '/posts/new',
         element: <PostEdit />
       },
       {
-        path: '/posts/',
+        path: '/users/:id/posts',
         element: <Posts />
       },
-      ,
       {
-        path: '/posts/1',
-        element: <PostDetail />
+        path: '/tags/:tag/posts',
+        element: <Posts />
       }
     ]
   }
