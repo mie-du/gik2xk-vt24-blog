@@ -13,7 +13,8 @@ function PostItemSmall({ post }) {
           {post.author.username}
         </Link>
       </p>
-      {post.tags.length > 0 && post.tags.map((tag) => <Tag text={tag} />)}
+      {post.tags.length > 0 &&
+        post.tags.map((tag) => <Tag key={tag} text={tag} />)}
       <p>{post.body}</p>
     </>
   );
