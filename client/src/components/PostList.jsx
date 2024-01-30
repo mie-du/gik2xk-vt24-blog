@@ -1,4 +1,5 @@
 import PostItemSmall from './PostItemSmall';
+import { getAll } from '../services/PostService';
 
 function PostList() {
   const posts = [
@@ -175,7 +176,7 @@ function PostList() {
       tags: []
     }
   ];
-
+  getAll().then((posts) => console.log(posts));
   return (
     <ul>
       {posts?.length > 0 ? (
