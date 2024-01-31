@@ -51,6 +51,26 @@ function PostEdit() {
     );
   }
 
+  function onTagAdd(tagString) {
+    //splitta arrayen vid kommatecken
+    const tagArray = tagString.split(',');
+    //trimma whitespace runt taggar
+    const uniqueAndTrimmedTags = tagArray
+      .map((tag) => tag.trim())
+      .filter((tag) => !post.tags.includes(tag));
+
+    //slå samman befintlig tag-array med de nya, unika taggarna
+    const mergedArray = [...post.tags, ...uniqueAndTrimmedTags];
+
+    //spara befintligt inlägg med nya tags-arrayen till state.
+    setPost({ ...post, tags: mergedArray });
+  }
+
+  function onTagDelete(tagToDelete) {
+    const newTags = post.tags.filter((tag) => tag !== tagToDelete);
+
+    setPost({ ...post, tags: newTags });
+  }
   return (
     <form>
       <div>
@@ -84,10 +104,12 @@ function PostEdit() {
       </div>
       <div>
         {post?.tags?.length > 0 &&
-          post.tags.map((tag) => <Chip key={tag} label={tag} />)}
+          post.tags.map((tag) => (
+            <Chip onDelete={() => onTagDelete(tag)} key={tag} label={tag} />
+          ))}
       </div>
       <div>
-        <TagField />
+        <TagField onSave={onTagAdd} />
       </div>
       <div>
         <Button variant="contained" onClick={() => navigate(-1)}>
