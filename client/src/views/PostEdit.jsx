@@ -1,13 +1,20 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { getOne } from '../services/PostService';
+import { create, getOne, remove, update } from '../services/PostService';
 import { Button, Chip, TextField } from '@mui/material';
 import TagField from '../components/TagField';
 
 function PostEdit() {
   const { id } = useParams();
   const navigate = useNavigate();
-  const emptyPost = { title: '', body: '', imageUrl: '', tags: [] };
+  const emptyPost = {
+    id: 0,
+    title: '',
+    body: '',
+    imageUrl: '',
+    tags: [],
+    userId: 2
+  };
   const [post, setPost] = useState(emptyPost);
 
   useEffect(() => {
@@ -26,7 +33,23 @@ function PostEdit() {
     setPost(newPost);
   }
 
-  function onSave() {}
+  function onSave() {
+    if (post.id === 0) {
+      create(post).then((response) => {
+        navigate('/', { replace: true, state: response });
+      });
+    } else {
+      update(post).then((response) =>
+        navigate(`/posts/${post.id}`, { replace: true, state: response })
+      );
+    }
+  }
+
+  function onDelete() {
+    remove(post.id).then((response) =>
+      navigate('/', { replace: true, state: response })
+    );
+  }
 
   return (
     <form>
@@ -71,7 +94,7 @@ function PostEdit() {
           Tillbaka
         </Button>
         {id && (
-          <Button variant="contained" color="error">
+          <Button onClick={onDelete} variant="contained" color="error">
             Ta bort
           </Button>
         )}
