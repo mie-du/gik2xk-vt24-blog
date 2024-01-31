@@ -4,7 +4,7 @@ import Comment from '../components/Comment';
 import { Button } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { getOne } from '../services/PostService';
+import { addComment, getOne } from '../services/PostService';
 
 function PostDetail() {
   const { id } = useParams();
@@ -17,12 +17,18 @@ function PostDetail() {
 
   const navigate = useNavigate();
 
+  function onCommentAdd(comment) {
+    addComment(post.id, comment)
+      .then((comment) => getOne(id))
+      .then((post) => setPost(post));
+  }
+
   return post ? (
     <div>
       <PostItemLarge post={post} />
       <Button onClick={() => navigate(-1)}>Tillbaka</Button>
       <Button onClick={() => navigate(`/posts/${post.id}/edit`)}>Ändra</Button>
-      <CommentForm />
+      <CommentForm onSave={onCommentAdd} />
       {post.comments &&
         post.comments.map((comment, i) => (
           <Comment key={`comment_${i}`} comment={comment} />
