@@ -19,7 +19,7 @@ export async function getOne(id) {
     const response = await axios.get(`/posts/${id}`);
     if (response.status === 200) return response.data;
     else {
-      console.log(data);
+      console.log(response.data);
       return null;
     }
   } catch (e) {
@@ -32,7 +32,7 @@ export async function create(post) {
     const response = await axios.post('/posts', post);
     if (response.status === 200) return response.data;
     else {
-      console.log(data);
+      console.log(response.data);
       return null;
     }
   } catch (e) {
@@ -45,7 +45,7 @@ export async function update(post) {
     const response = await axios.put('/posts', post);
     if (response.status === 200) return response.data;
     else {
-      console.log(data);
+      console.log(response.data);
       return null;
     }
   } catch (e) {
