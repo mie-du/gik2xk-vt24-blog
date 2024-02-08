@@ -3,7 +3,7 @@ import UserItemSmall from './UserItemSmall';
 
 function PostItemLarge({ post }) {
   return (
-    <div style={{ border: '1px solid black' }}>
+    <div>
       <h3>{post.title}</h3>
       {post.tags &&
         post.tags.map((tag) => <Tag key={`tag_${tag}`} text={tag} />)}
