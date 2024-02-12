@@ -14,7 +14,7 @@ function App() {
       <Box component="header" sx={{ flexGrow: 1 }}>
         <AppBar position="static">
           <Toolbar>
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            <Typography variant="h1" component="div" sx={{ flexGrow: 1 }}>
               <Link to="/">Blogg</Link>
             </Typography>
             <Button color="inherit">
