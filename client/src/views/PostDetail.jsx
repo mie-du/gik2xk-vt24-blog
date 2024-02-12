@@ -1,7 +1,7 @@
 import PostItemLarge from '../components/PostItemLarge';
 import CommentForm from '../components/CommentForm';
 import Comment from '../components/Comment';
-import { Box, Button, Container } from '@mui/material';
+import { Box, Button, Container, List, Typography } from '@mui/material';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { addComment, getOne } from '../services/PostService';
@@ -44,11 +44,17 @@ function PostDetail() {
           Ändra
         </Button>
       </Box>
-      <CommentForm onSave={onCommentAdd} />
-      {post.comments &&
-        post.comments.map((comment, i) => (
-          <Comment key={`comment_${i}`} comment={comment} />
-        ))}
+      <Box>
+        <Typography variant="h3">Kommentarer</Typography>
+        <CommentForm onSave={onCommentAdd} />
+        {post.comments && (
+          <List sx={{ width: '100%', bgcolor: 'background.paper' }}>
+            {post.comments.map((comment, i) => (
+              <Comment key={`comment_${i}`} comment={comment} />
+            ))}
+          </List>
+        )}
+      </Box>
     </Container>
   ) : (
     <h3>Kunde inte hämta inlägg</h3>
