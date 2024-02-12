@@ -14,11 +14,13 @@ function PostList({ pathname }) {
   return (
     <ul>
       {posts?.length > 0 ? (
-        posts.map((post) => (
-          <li key={`posts_${post.id}`}>
-            <PostItemSmall post={post} />
-          </li>
-        ))
+        posts
+          .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+          .map((post) => (
+            <li key={`posts_${post.id}`}>
+              <PostItemSmall post={post} />
+            </li>
+          ))
       ) : (
         <h3>Kunde inte hämta inlägg</h3>
       )}

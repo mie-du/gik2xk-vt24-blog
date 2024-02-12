@@ -14,6 +14,7 @@ import {
 } from '@mui/material';
 import placeholderImage from '../assets/placeholder.png';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
+import { grey } from '@mui/material/colors';
 
 function PostItemSmall({ post }) {
   const navigate = useNavigate();
@@ -28,7 +29,17 @@ function PostItemSmall({ post }) {
             </Typography>
           }
           subheader={`Skrivet: ${toRelativeDateString(post.createdAt)}`}
-          avatar={<UserItemSmall user={post.author} />}
+          avatar={
+            <UserItemSmall
+              style={{
+                minWidth: '7rem',
+                paddingRight: '.7rem',
+                marginRight: '.5rem',
+                borderRight: `1px solid ${grey[400]}`
+              }}
+              user={post.author}
+            />
+          }
         />
         <CardMedia
           component="img"
