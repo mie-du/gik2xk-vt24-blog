@@ -16,17 +16,25 @@ function Comment({ comment }) {
           </Typography>
         }
         secondary={
-          <Box>
-            <Typography variant="body2">
+          <>
+            <Typography variant="body2" component="span">
               {toDateTimeString(comment.createdAt)}
             </Typography>
-            <Typography sx={{ my: 1 }} color="text.primary" variant="h4">
+            <Typography
+              sx={{ my: 1, display: 'block' }}
+              color="text.primary"
+              variant="h4"
+              component="span">
               {comment.title}
             </Typography>
-            <Typography color="text.secondary" variant="body1">
+            <Typography
+              color="text.secondary"
+              variant="body1"
+              component="span"
+              sx={{ display: 'block' }}>
               {comment.body}
             </Typography>
-          </Box>
+          </>
         }></ListItemText>
     </ListItem>
   );
